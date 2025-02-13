@@ -59,10 +59,16 @@ document.addEventListener("DOMContentLoaded", function () {
             unit: 'mm',
             format: 'a5'
         });
+
+        // Cargar fuente cursiva compatible (DejaVu Sans)
+        doc.addFont("https://cdn.jsdelivr.net/npm/@pdf-lib/fontkit@1.0.0/DejaVuSans.ttf", "DejaVuSans", "normal");
+        doc.setFont("DejaVuSans");
     
         // Configuración de fuente y contenido
         doc.setFont("helvetica", "italic"); // Fuente cursiva
         doc.setFontSize(18);
+        doc.setTextColor(255, 105, 180);
+        doc.text("Carta para Ti", 60, 20, { align: "center" });
         doc.setTextColor(0, 0, 0);
         const texto = [
             "Lau:",
@@ -70,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "es un regalo. Tu sonrisa ilumina mis días y tu",
             "forma de ser hace que todo sea mejor.",
             "¿Aceptas ser mi San Valentín?",
-            "Con todo mi amor,",
+            "Con todo mi cariño,",
             "Alex ♥"  // Usamos el símbolo Unicode estándar
         ];
         doc.text(texto, 15, 40, { maxWidth: 120 });
