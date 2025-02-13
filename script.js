@@ -54,22 +54,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Generador de PDF
     function generarPDF() {
-        const doc = new jspdf.jsPDF({ 
-            orientation: 'portrait', 
-            unit: 'mm', 
-            format: 'a5' 
+        const doc = new jspdf.jsPDF({
+            orientation: 'portrait',
+            unit: 'mm',
+            format: 'a5'
         });
     
-        // Cargar fuente cursiva compatible (DejaVu Sans)
-        doc.addFont("https://cdn.jsdelivr.net/npm/@pdf-lib/fontkit@1.0.0/DejaVuSans.ttf", "DejaVuSans", "normal");
-        doc.setFont("DejaVuSans");
-        
-        // Texto en cursiva
-        doc.setFontSize(28);
-        doc.setTextColor(255, 105, 180);
-        doc.text("Carta para Ti", 60, 20, { align: "center" });
-    
-        // Contenido con corazón corregido
+        // Configuración de fuente y contenido
+        doc.setFont("helvetica", "italic"); // Fuente cursiva
         doc.setFontSize(18);
         doc.setTextColor(0, 0, 0);
         const texto = [
@@ -83,18 +75,15 @@ document.addEventListener("DOMContentLoaded", function () {
         ];
         doc.text(texto, 15, 40, { maxWidth: 120 });
     
-        doc.save('carta_amor.pdf');
+        doc.save('carta.pdf');
     }
 
-    // Evento Sí
+    // Evento del botón "Sí"
     botonSi.addEventListener("click", function () {
-        for(let i = 0; i < 75; i++) {
-            setTimeout(crearConfeti, Math.random() * 1000);
-        }
-        generarPDF();
-        descargar.style.display = "block";
+        generarPDF(); // Descarga directa sin depender del botón
+        descargar.style.display = "none"; // Opcional: Oculta el botón antiguo
     });
-
+    
     // Manejo móvil
     if ('ontouchstart' in window) {
         botonNo.style.position = "static";
