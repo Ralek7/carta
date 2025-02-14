@@ -60,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Configuración de fuente segura
         doc.setFont("helvetica", "italic");
         doc.setFontSize(18);
+        doc.setTextColor(0, 0, 0);
         
         // Texto con formato correcto
         const texto = [
