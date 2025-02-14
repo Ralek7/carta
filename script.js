@@ -60,12 +60,19 @@ document.addEventListener("DOMContentLoaded", function () {
             format: 'a5'
         });
 
+        doc.addFont(
+            "data:font/truetype;charset=utf-8;base64,{{BASE64_AQUÍ}}", 
+            "DancingScript", 
+            "normal"
+        );
+        doc.setFont("DancingScript", "normal");
+
         // Cargar fuente cursiva compatible (DejaVu Sans)
         doc.addFont("https://cdn.jsdelivr.net/npm/@pdf-lib/fontkit@1.0.0/DejaVuSans.ttf", "DejaVuSans", "normal");
         doc.setFont("DejaVuSans");
     
         // Configuración de fuente y contenido
-        doc.setFont("helvetica", "italic"); // Fuente cursiva
+        doc.setFont("times", "italic"); // Fuente cursiva
         doc.setFontSize(18);
         doc.setTextColor(255, 105, 180);
         doc.text("Carta para Ti", 60, 20, { align: "center" });
