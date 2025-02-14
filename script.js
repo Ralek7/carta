@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
             unit: 'mm',
             format: 'a5'
         });
-
+        
         // Texto en cursiva
         doc.setFontSize(28);
         doc.setTextColor(255, 105, 180);
