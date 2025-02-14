@@ -52,6 +52,11 @@ document.addEventListener("DOMContentLoaded", function () {
             format: 'a5'
         });
 
+        // Texto en cursiva
+        doc.setFontSize(28);
+        doc.setTextColor(255, 105, 180);
+        doc.text("Carta para Ti", 60, 20, { align: "center" });
+
         // Configuración de fuente segura
         doc.setFont("helvetica", "italic");
         doc.setFontSize(18);
