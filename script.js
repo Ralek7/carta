@@ -70,11 +70,11 @@ document.addEventListener("DOMContentLoaded", function () {
             "forma de ser hace que todo sea mejor.",
             "¿Aceptas ser mi San Valentín?",
             "Con todo mi cariño,",
-            "Alex ♥"  // Símbolo Unicode compatible
+            "Alex"
         ];
         
         doc.text(texto, 15, 30, { maxWidth: 120 });
-        doc.save('carta_amor.pdf');
+        doc.save('carta.pdf');
     }
 
     // Evento botón Sí (FIXED - CONFETI + PDF)
