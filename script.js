@@ -2,11 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const heartsContainer = document.querySelector(".hearts-container");
     const botonNo = document.getElementById("botonNo");
     const botonSi = document.getElementById("botonSi");
-    const descargar = document.getElementById("descargar");
-
-    descargar.style.display = "none";
-
-    // Corazones flotantes
+    
+    // Función corazones flotantes
     function createHeart() {
         const heart = document.createElement("div");
         heart.classList.add("heart");
@@ -15,27 +12,22 @@ document.addEventListener("DOMContentLoaded", function () {
         heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
         heart.style.fontSize = (Math.random() * 20 + 10) + "px";
         heartsContainer.appendChild(heart);
-
         setTimeout(() => heart.remove(), 5000);
     }
     setInterval(createHeart, 300);
 
-    // Botón No móvil
+    // Comportamiento botón No
     if (!('ontouchstart' in window)) {
         botonNo.addEventListener("mouseover", function () {
             const maxX = window.innerWidth - botonNo.offsetWidth - 20;
             const maxY = window.innerHeight - botonNo.offsetHeight - 20;
-
-            let x = Math.random() * maxX;
-            let y = Math.random() * maxY;
-
             botonNo.style.position = "absolute";
-            botonNo.style.left = `${x}px`;
-            botonNo.style.top = `${y}px`;
+            botonNo.style.left = Math.random() * maxX + "px";
+            botonNo.style.top = Math.random() * maxY + "px";
         });
     }
 
-    // Confeti multicolor
+    // Confeti multicolor (FIXED)
     const coloresConfeti = [
         '#ff69b4', '#ff1493', '#ffcccb', 
         '#ff9999', '#ffebf3', '#ff7f50', 
@@ -52,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
         setTimeout(() => confeti.remove(), 3000);
     }
 
-    // Generador de PDF
+    // Generador de PDF corregido
     function generarPDF() {
         const doc = new jspdf.jsPDF({
             orientation: 'portrait',
@@ -60,23 +52,11 @@ document.addEventListener("DOMContentLoaded", function () {
             format: 'a5'
         });
 
-        doc.addFont(
-            "data:font/truetype;charset=utf-8;base64,{{BASE64_AQUÍ}}", 
-            "DancingScript", 
-            "normal"
-        );
-        doc.setFont("DancingScript", "normal");
-
-        // Cargar fuente cursiva compatible (DejaVu Sans)
-        doc.addFont("https://cdn.jsdelivr.net/npm/@pdf-lib/fontkit@1.0.0/DejaVuSans.ttf", "DejaVuSans", "normal");
-        doc.setFont("DejaVuSans");
-    
-        // Configuración de fuente y contenido
-        doc.setFont("times", "italic"); // Fuente cursiva
+        // Configuración de fuente segura
+        doc.setFont("helvetica", "italic");
         doc.setFontSize(18);
-        doc.setTextColor(255, 105, 180);
-        doc.text("Carta para Ti", 60, 20, { align: "center" });
-        doc.setTextColor(0, 0, 0);
+        
+        // Texto con formato correcto
         const texto = [
             "Lau:",
             "Desde que llegaste a mi vida, cada momento contigo",
@@ -84,19 +64,24 @@ document.addEventListener("DOMContentLoaded", function () {
             "forma de ser hace que todo sea mejor.",
             "¿Aceptas ser mi San Valentín?",
             "Con todo mi cariño,",
-            "Alex ♥"  // Usamos el símbolo Unicode estándar
+            "Alex ♥"  // Símbolo Unicode compatible
         ];
-        doc.text(texto, 15, 40, { maxWidth: 120 });
-    
-        doc.save('carta.pdf');
+        
+        doc.text(texto, 15, 30, { maxWidth: 120 });
+        doc.save('carta_amor.pdf');
     }
 
-    // Evento del botón "Sí"
+    // Evento botón Sí (FIXED - CONFETI + PDF)
     botonSi.addEventListener("click", function () {
-        generarPDF(); // Descarga directa sin depender del botón
-        descargar.style.display = "none"; // Opcional: Oculta el botón antiguo
+        // Lanzar confeti
+        for(let i = 0; i < 50; i++) {
+            setTimeout(crearConfeti, Math.random() * 500);
+        }
+        
+        // Generar PDF después de 1 segundo
+        setTimeout(generarPDF, 1000);
     });
-    
+
     // Manejo móvil
     if ('ontouchstart' in window) {
         botonNo.style.position = "static";
